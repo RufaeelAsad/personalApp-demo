@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_app_demo/transaction.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,9 +21,41 @@ class HomePage extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Card(
-              child: Text('CHART'),
+            Container(
+              width: double.infinity,
+              child: Card(
+                child: Text('CHART'),
+                color: Colors.blue,
+                elevation: 5,
+              ),
             ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Tittle'),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Amount',
+                      ),
+                    ),
+                    TextButton(
+                        onPressed: null,
+                        child: Text('Add Transaction',style: TextStyle(
+                            color: Colors.purple
+                        ),)
+
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             Column(
               children: (transaction as List<Transaction>).map((tx) {
                 return Card(
@@ -51,9 +84,10 @@ class HomePage extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        Text(tx.date.toString(),style: TextStyle(
-                          color: Colors.grey
-                        ),),
+                        Text(
+                          DateFormat.yMMMd().format(tx.date!),
+                          style: TextStyle(color: Colors.grey),
+                        ),
                       ],
                     )
                   ],
